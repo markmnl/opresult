@@ -1,3 +1,5 @@
+[![build-test](https://github.com/markmnl/opresult/actions/workflows/build-test.yml/badge.svg)](https://github.com/markmnl/opresult/actions/workflows/build-test.yml)
+
 # opresult
 
 See original blog post on the Operation Result pattern in C# .NET here: https://www.codeproject.com/Articles/1022462/Error-Handling-in-SOLID-Csharp-NET-The-Operation-R
