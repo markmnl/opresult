@@ -1,28 +1,18 @@
-name: build-test
+name: package
 
 on:
-  push:
-    branches: [ "main" ]
-    paths-ignore: 
-      - 'README.md'
-      - '.gitignore'
-  pull_request:
-    branches: [ "main" ]
-    paths-ignore: 
-      - 'README.md'
-      - '.gitignore'
+  release:
+    types: [published]
 
 jobs:
-  build:
+  package:
     defaults:
       run:
         working-directory: ./src
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
     runs-on: windows-latest
-    
+        
     steps:
+    
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -36,5 +26,9 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Build
-      run: dotnet build
+    - name: Pack
+      run: dotnet pack --configuration Release /p:Version=${{ github.ref_name }} --output .
+
+    - name: Push package
+      run: dotnet nuget push OperationResult.${{ github.ref_name }}.nupkg --source https://nuget.pkg.github.com/markmnl/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
+
