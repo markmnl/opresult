@@ -29,14 +29,6 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release /p:Version=${{ github.ref_name }} --output .
 
-    - name: Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: nuget
-        if-no-files-found: error
-        retention-days: 7
-        path: OperationResult.${{ github.ref_name }}.nupkg
-
     - name: Push package
       run: 
         dotnet nuget push OperationResult.${{ github.ref_name }}.nupkg --source https://nuget.pkg.github.com/markmnl/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
