@@ -31,5 +31,5 @@ jobs:
 
     - name: Push package
       run: 
-        dotnet nuget push OperationResult.${{ github.ref_name }}.nupkg --source https://nuget.pkg.github.com/markmnl/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
+        dotnet nuget push OpResult.${{ github.ref_name }}.nupkg --source https://nuget.pkg.github.com/markmnl/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
 
