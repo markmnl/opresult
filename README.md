@@ -2,7 +2,7 @@
 
 # opresult
 
-See original blog post on the Operation Result pattern in C# .NET here: https://www.codeproject.com/Articles/1022462/Error-Handling-in-SOLID-Csharp-NET-The-Operation-R
+See original blog post on the Operation Result pattern in C# .NET ![here](https://www.codeproject.com/Articles/1022462/Error-Handling-in-SOLID-Csharp-NET-The-Operation-R)
 
 Improve your error handling by:
 
@@ -12,7 +12,11 @@ Improve your error handling by:
 
 ## Usage
 
-After adding this NuGet package in the normal way
+After adding this NuGet package e.g.
+
+```
+donet github
+```
 
 ```C#
 

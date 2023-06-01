@@ -1,5 +1,5 @@
 ﻿
-namespace OperationResult
+namespace OpResult
 {
     public class OpResult<TResult>
     {
