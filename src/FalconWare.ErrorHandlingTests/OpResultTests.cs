@@ -44,5 +44,26 @@ namespace FalconWare.ErrorHandling.Tests
 
             Assert.IsTrue(result.WasSuccess);
         }
+
+#if DEBUG
+        [TestMethod()]
+        public void OpResultAccessExceptionTest_IsThrownWhenWasSuccessNotChecked()
+        {
+            var returnValue = new Phobia();
+            var result = OpResultFactory.CreateSuccess(returnValue);
+
+            Assert.ThrowsException<OpResultAccessException>(() => result.Result);
+        }
+
+        [TestMethod()]
+        public void OpResultAccessExceptionTest_IsNotThrownWhenWasSuccessNotChecked()
+        {
+            var returnValue = new Phobia();
+            var result = OpResultFactory.CreateSuccess(returnValue);
+
+            Assert.IsTrue(result.WasSuccess);
+            Assert.IsNotNull(result.Result);
+        }
+#endif
     }
 }

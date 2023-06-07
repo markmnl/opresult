@@ -11,18 +11,52 @@ namespace FalconWare.ErrorHandling
     /// <typeparam name="TResult">Type of result</typeparam>
     public class OpResult<TResult>
     {
+        private bool _wasSuccess;
+        private bool _wasSuccessChecked;
+        private TResult _result;
+
         /// <summary>
         /// Indicates whether the operation was successful.
         /// </summary>
-        public bool WasSuccess { get; internal set; }
+        public bool WasSuccess 
+        { 
+            get 
+            {
+                _wasSuccessChecked = true;
+                return _wasSuccess;
+            }
+            internal set 
+            {
+                _wasSuccess = value;
+            }
+        }
 
         /// <summary>
-        /// Result of the operation only set if successful, e.g. `WasSuccess` is true.
+        /// Result of the operation only set if successful, i.e. `WasSuccess` is true.
+        ///
+        /// Note `WasSuccess` MUST be checked before accessing this property - failure to do so will 
+        /// result in if DEBUG symbol is set, i.e. in Debug builds.
         /// </summary>
-        public TResult Result { get; internal set; }
+        public TResult Result 
+        {
+             get 
+             {
+#if DEBUG
+                if (!_wasSuccessChecked)
+                {
+                    throw new OpResultAccessException();
+                }
+#endif
+                return _result;                
+             }
+             internal set 
+             {
+                _result = value;
+             } 
+        }
 
         /// <summary>
-        /// Human readable string why the operation was not succesful. Only set if the operation was not successful
+        /// Human readable string summarising why the operation was not succesful. Only set if the operation was not successful
         /// i.e. `WasSuccess` is false.
         /// </summary>
         public string NonSuccessMessage { get; internal set; }
