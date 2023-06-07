@@ -13,7 +13,7 @@ namespace FalconWare.ErrorHandling
     {
         private bool _wasSuccess;
         private bool _wasSuccessChecked;
-        private TResult _result;
+        private TResult _value;
 
         /// <summary>
         /// Indicates whether the operation was successful.
@@ -37,7 +37,7 @@ namespace FalconWare.ErrorHandling
         /// Note `WasSuccess` MUST be checked before accessing this property - failure to do so will 
         /// result in if DEBUG symbol is set, i.e. in Debug builds.
         /// </summary>
-        public TResult Result 
+        public TResult Value 
         {
              get 
              {
@@ -47,11 +47,11 @@ namespace FalconWare.ErrorHandling
                     throw new OpResultAccessException();
                 }
 #endif
-                return _result;                
+                return _value;                
              }
              internal set 
              {
-                _result = value;
+                _value = value;
              } 
         }
 

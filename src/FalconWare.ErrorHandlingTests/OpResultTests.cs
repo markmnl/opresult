@@ -1,10 +1,5 @@
 ﻿using FalconWare.ErrorHandling;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FalconWare.ErrorHandling.Tests
 {
@@ -52,7 +47,7 @@ namespace FalconWare.ErrorHandling.Tests
             var returnValue = new Phobia();
             var result = OpResultFactory.CreateSuccess(returnValue);
 
-            Assert.ThrowsException<OpResultAccessException>(() => result.Result);
+            Assert.ThrowsException<OpResultAccessException>(() => result.Value);
         }
 
         [TestMethod()]
@@ -62,7 +57,7 @@ namespace FalconWare.ErrorHandling.Tests
             var result = OpResultFactory.CreateSuccess(returnValue);
 
             Assert.IsTrue(result.WasSuccess);
-            Assert.IsNotNull(result.Result);
+            Assert.IsNotNull(result.Value);
         }
 #endif
     }

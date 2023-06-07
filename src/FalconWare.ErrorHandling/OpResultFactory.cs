@@ -7,11 +7,11 @@ namespace FalconWare.ErrorHandling
         /// Creates a sucessful <see cref="OpResult{TResult}"/> with <paramref name="result"/>.
         /// </summary>
         /// <typeparam name="TResult">Type of result</typeparam>
-        /// <param name="result">Result of the operation assigned to <see cref="OpResult{TResult}.Result"/>.</param>
-        /// <returns>New unsuccessful <see cref="OpResult{TResult}.Result"/></returns>
+        /// <param name="result">Result of the operation assigned to <see cref="OpResult{TResult}.Value"/>.</param>
+        /// <returns>New unsuccessful <see cref="OpResult{TResult}.Value"/></returns>
         public static OpResult<TResult> CreateSuccess<TResult>(TResult result)
         {
-            return new OpResult<TResult> { WasSuccess = true, Result = result };
+            return new OpResult<TResult> { WasSuccess = true, Value = result };
         }
 
         /// <summary>
