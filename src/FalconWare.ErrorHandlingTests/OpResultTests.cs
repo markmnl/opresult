@@ -1,10 +1,5 @@
 ﻿using FalconWare.ErrorHandling;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FalconWare.ErrorHandling.Tests
 {
@@ -44,5 +39,26 @@ namespace FalconWare.ErrorHandling.Tests
 
             Assert.IsTrue(result.WasSuccess);
         }
+
+#if DEBUG
+        [TestMethod()]
+        public void OpResultAccessExceptionTest_IsThrownWhenWasSuccessNotChecked()
+        {
+            var returnValue = new Phobia();
+            var result = OpResultFactory.CreateSuccess(returnValue);
+
+            Assert.ThrowsException<OpResultAccessException>(() => result.Value);
+        }
+
+        [TestMethod()]
+        public void OpResultAccessExceptionTest_IsNotThrownWhenWasSuccessNotChecked()
+        {
+            var returnValue = new Phobia();
+            var result = OpResultFactory.CreateSuccess(returnValue);
+
+            Assert.IsTrue(result.WasSuccess);
+            Assert.IsNotNull(result.Value);
+        }
+#endif
     }
 }
