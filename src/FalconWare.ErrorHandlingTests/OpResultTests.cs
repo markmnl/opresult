@@ -1,5 +1,4 @@
-﻿using FalconWare.ErrorHandling;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FalconWare.ErrorHandling.Tests
 {

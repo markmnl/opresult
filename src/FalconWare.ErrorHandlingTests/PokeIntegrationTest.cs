@@ -1,18 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 
 namespace FalconWare.ErrorHandling.Tests
 {
-    class Pokemon
-    {
-        
-    }
-    
     [TestClass()]
     public class PokeIntegrationTest
     {
@@ -26,6 +18,7 @@ namespace FalconWare.ErrorHandling.Tests
 
         private async Task<OpResult<float>> TryGetPokemonBmiAsync(string name)
         {
+            // query the pokeapi for pokemon with name supplied
             string jsonString;
             try
             {
@@ -44,14 +37,44 @@ namespace FalconWare.ErrorHandling.Tests
                 return OpResultFactory.CreateFailure<float>(ex);
             }
 
-            var pokemon = JObject.Parse(jsonString);
-            var height = pokemon["height"].Value<float>();
-            var weight = pokemon["weight"].Value<float>();
+            // parse pokemon json
+            JObject pokemon;
+            try
+            {
+                pokemon = JObject.Parse(jsonString);
+            }
+            catch (JsonReaderException jre)
+            {
+                return OpResultFactory.CreateFailure<float>(jre);
+            }
 
-            var bmi = weight / (height * height);
-
-            return OpResultFactory.CreateSuccess(bmi);
-        } 
+            // try extract height and weight, calc bmi and return that
+            try
+            {
+                var height = pokemon["height"].Value<float>();
+                var weight = pokemon["weight"].Value<float>();
+                if (height < 1.0f)
+                {
+                    return OpResultFactory.CreateFailure<float>("Failed to parse pokemon - height cannot be less than 1");
+                }
+                if (weight < 1.0f)
+                {
+                    return OpResultFactory.CreateFailure<float>("Failed to parse pokemon - weight cannot be less than 1");
+                }
+                var bmi = weight / (height * height);
+                return OpResultFactory.CreateSuccess(bmi);
+            }
+            catch (NullReferenceException nre)
+            {
+                var msg = $"Failed parse pokemon response height or weight missing: {nre.Message}";
+                return OpResultFactory.CreateFailure<float>(msg);
+            }
+            catch (FormatException fe)
+            {
+                var msg = $"Failed parse pokemon response height or weight: {fe.Message}";
+                return OpResultFactory.CreateFailure<float>(msg);
+            }
+        }
 
 
         [TestMethod()]
