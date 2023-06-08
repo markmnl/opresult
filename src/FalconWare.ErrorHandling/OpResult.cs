@@ -18,14 +18,14 @@ namespace FalconWare.ErrorHandling
         /// <summary>
         /// Indicates whether the operation was successful.
         /// </summary>
-        public bool WasSuccess 
-        { 
-            get 
+        public bool WasSuccess
+        {
+            get
             {
                 _wasSuccessChecked = true;
                 return _wasSuccess;
             }
-            internal set 
+            internal set
             {
                 _wasSuccess = value;
             }
@@ -35,24 +35,24 @@ namespace FalconWare.ErrorHandling
         /// Result of the operation only set if successful, i.e. `WasSuccess` is true.
         ///
         /// Note `WasSuccess` MUST be checked before accessing this property - failure to do so will 
-        /// result in if DEBUG symbol is set, i.e. in Debug builds.
+        /// result in <see cref="OpResultAccessException"/> if DEBUG symbol is set, i.e. in Debug builds.
         /// </summary>
-        public TResult Value 
+        public TResult Value
         {
-             get 
-             {
+            get
+            {
 #if DEBUG
                 if (!_wasSuccessChecked)
                 {
                     throw new OpResultAccessException();
                 }
 #endif
-                return _value;                
-             }
-             internal set 
-             {
+                return _value;
+            }
+            internal set
+            {
                 _value = value;
-             } 
+            }
         }
 
         /// <summary>
