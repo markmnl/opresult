@@ -23,7 +23,12 @@ Handle results of an opertaion checking the result's `WasSuccess` then accessing
 ```C#
 var pokemonName = "squirtle";
 var result = await TryGetPokemonBmiAsync(pokemonName);
-if (result.WasSuccess)
+if (!result.WasSuccess)
+{
+    // handle the failure
+    _logger.LogError($"Failed to get {pokemonName} BMI: {result.NonSuccessMessage}");
+}
+else
 {
     // handle the failure
     _logger.LogError($"Failed to get {pokemonName} BMI: {result.NonSuccessMessage}");
