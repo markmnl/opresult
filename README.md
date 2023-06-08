@@ -30,11 +30,6 @@ if (!result.WasSuccess)
 }
 else
 {
-    // handle the failure
-    _logger.LogError($"Failed to get {pokemonName} BMI: {result.NonSuccessMessage}");
-}
-else
-{
     // do something with the return value
     var bmi = result.Value;
     if (bmi < 18.5)
