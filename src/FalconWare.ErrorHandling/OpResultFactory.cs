@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace FalconWare.ErrorHandling
 {
     public class OpResultFactory

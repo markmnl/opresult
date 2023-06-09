@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FalconWare.ErrorHandling", "FalconWare.ErrorHandling\FalconWare.ErrorHandling.csproj", "{04AD82CB-FB54-4040-8D46-180663F7E72F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FalconWare.ErrorHandlingTests", "FalconWare.ErrorHandlingTests\FalconWare.ErrorHandlingTests.csproj", "{2CE0E7FB-7479-4C49-8557-D16A87FB8BE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FalconWare.ErrorHandlingTests", "FalconWare.ErrorHandlingTests\FalconWare.ErrorHandlingTests.csproj", "{2CE0E7FB-7479-4C49-8557-D16A87FB8BE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,7 +15,7 @@ Improve your error handling by enforcing:
 After adding this NuGet package e.g.
 
 ```
-donet github
+dotnet add package FalconWare.ErrorHandling
 ```
 
 Handle results of an opertaion checking the result's `WasSuccess` then accessing the result `Value`, for example:
@@ -24,11 +24,6 @@ Handle results of an opertaion checking the result's `WasSuccess` then accessing
 var pokemonName = "squirtle";
 var result = await TryGetPokemonBmiAsync(pokemonName);
 if (!result.WasSuccess)
-{
-    // handle the failure
-    _logger.LogError($"Failed to get {pokemonName} BMI: {result.NonSuccessMessage}");
-}
-else
 {
     // handle the failure
     _logger.LogError($"Failed to get {pokemonName} BMI: {result.NonSuccessMessage}");
