@@ -15,7 +15,7 @@ Improve your error handling by enforcing:
 After adding this NuGet package e.g.
 
 ```
-donet github
+dotnet add package FalconWare.ErrorHandling
 ```
 
 Handle results of an opertaion checking the result's `WasSuccess` then accessing the result `Value`, for example:

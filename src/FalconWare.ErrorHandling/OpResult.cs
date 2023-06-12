@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace FalconWare.ErrorHandling
 {
     /// <summary>
@@ -12,7 +14,9 @@ namespace FalconWare.ErrorHandling
     public class OpResult<TResult>
     {
         private bool _wasSuccess;
+#if DEBUG
         private bool _wasSuccessChecked;
+#endif
         private TResult _value;
 
         /// <summary>
@@ -22,7 +26,9 @@ namespace FalconWare.ErrorHandling
         {
             get
             {
+#if DEBUG
                 _wasSuccessChecked = true;
+#endif
                 return _wasSuccess;
             }
             internal set
