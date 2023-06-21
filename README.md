@@ -18,7 +18,7 @@ After adding this NuGet package e.g.
 dotnet add package FalconWare.ErrorHandling
 ```
 
-Handle results of an opertaion checking the result's `WasSuccess` then accessing the result `Value`, for example:
+Handle result of an operation by first checking the result's `WasSuccess` then accessing the result `Value` if successful, for example:
 
 ```C#
 var pokemonName = "squirtle";
